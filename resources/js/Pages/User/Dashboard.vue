@@ -66,7 +66,22 @@ defineProps({
                                                 {{ scenario.title }}
                                             </td>
                                             <td class="px-4 py-3">
-                                                {{ scenario.content }}
+                                                <template
+                                                    v-if="
+                                                        scenario.content
+                                                            .length >= 10
+                                                    "
+                                                >
+                                                    {{
+                                                        scenario.content.slice(
+                                                            0,
+                                                            10
+                                                        ) + "..."
+                                                    }}
+                                                </template>
+                                                <template v-else>
+                                                    {{ scenario.content }}
+                                                </template>
                                             </td>
                                             <td class="px-4 py-3">
                                                 <template v-for="user in users">

@@ -6,6 +6,7 @@ use App\Http\Requests\User\StoreScenarioRequest;
 use App\Http\Requests\User\UpdateScenarioRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Scenario;
+use App\Models\ScenarioLike;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 
@@ -53,6 +54,7 @@ class ScenarioController extends Controller
     public function show(Scenario $scenario)
     {
         $id = Auth::id();
+        // dd($scenario);
         return Inertia::render('User/Scenario/Show', [
             'scenario' => $scenario,
             'user_id' => $id,
@@ -94,6 +96,16 @@ class ScenarioController extends Controller
         return to_route('user.dashboard')->with([
             'message' => 'ネタを削除しました',
             'status' => 'danger'
+        ]);
+    }
+
+    public function like(Scenario $scenario)
+    {
+        $scenario_id = $scenario->id;
+        $user_id = Auth::id();
+        ScenarioLike::create([
+            'scenario_id' => $scenario_id,
+            'user_id' => $user_id
         ]);
     }
 }

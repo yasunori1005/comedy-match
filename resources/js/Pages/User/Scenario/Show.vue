@@ -14,6 +14,11 @@ const deleteScenario = (id) => {
         onBefore: () => confirm("本当に削除しますか？"),
     });
 };
+
+
+const likeScenario=(id)=>{
+    router.post(route('user.scenario.like',{scenario:id}));
+}
 </script>
 
 <template>
@@ -80,6 +85,12 @@ const deleteScenario = (id) => {
                                         >
                                             編集する
                                         </Link>
+                                        
+                                        <button
+                                        @click="likeScenario(scenario.id)"
+                                            class="block text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+                                        >いいね
+                                        </button>
                                         <button
                                             @click="deleteScenario(scenario.id)"
                                             class="block text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg"
