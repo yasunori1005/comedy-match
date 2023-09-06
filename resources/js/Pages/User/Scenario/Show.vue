@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/UserAuthenticatedLayout.vue";
-import { Head , Link } from "@inertiajs/vue3";
+import { Head, Link } from "@inertiajs/vue3";
 import { reactive } from "vue";
 import { router } from "@inertiajs/vue3";
 
@@ -8,6 +8,12 @@ defineProps({
     scenario: Object,
     user_id: Number,
 });
+
+const deleteScenario = (id) => {
+    router.delete(route("user.scenario.destroy", { scenario: id }), {
+        onBefore: () => confirm("本当に削除しますか？"),
+    });
+};
 </script>
 
 <template>
@@ -59,18 +65,28 @@ defineProps({
                                         </div>
                                     </div>
                                 </div>
-                                <div class="p-2">
-                                    <Link
-                                        :href="
-                                            route('user.scenario.edit', {
-                                                scenario: scenario.id,
-                                            })
-                                        "
+                                <div class="p-2 w-full">
+                                    <div
                                         v-if="scenario.user_id == user_id"
-                                        class="block mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+                                        class="flex justify-between"
                                     >
-                                        編集する
-                                    </Link>
+                                        <Link
+                                            :href="
+                                                route('user.scenario.edit', {
+                                                    scenario: scenario.id,
+                                                })
+                                            "
+                                            class="block text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+                                        >
+                                            編集する
+                                        </Link>
+                                        <button
+                                            @click="deleteScenario(scenario.id)"
+                                            class="block text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg"
+                                        >
+                                            削除する
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

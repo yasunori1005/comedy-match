@@ -89,6 +89,11 @@ class ScenarioController extends Controller
      */
     public function destroy(Scenario $scenario)
     {
-        //
+        $scenario->delete();
+
+        return to_route('user.dashboard')->with([
+            'message' => 'ネタを削除しました',
+            'status' => 'danger'
+        ]);
     }
 }
