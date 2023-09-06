@@ -1,12 +1,12 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/UserAuthenticatedLayout.vue";
-import { Head } from "@inertiajs/vue3";
+import { Head , Link } from "@inertiajs/vue3";
 import { reactive } from "vue";
 import { router } from "@inertiajs/vue3";
 
 defineProps({
     scenario: Object,
-    user_id: String,
+    user_id: Number,
 });
 </script>
 
@@ -59,13 +59,18 @@ defineProps({
                                         </div>
                                     </div>
                                 </div>
-                                <div class="p-2 w-full">
-                                    <button
+                                <div class="p-2">
+                                    <Link
+                                        :href="
+                                            route('user.scenario.edit', {
+                                                scenario: scenario.id,
+                                            })
+                                        "
                                         v-if="scenario.user_id == user_id"
-                                        class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+                                        class="block mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
                                     >
                                         編集する
-                                    </button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>

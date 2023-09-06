@@ -64,7 +64,9 @@ class ScenarioController extends Controller
      */
     public function edit(Scenario $scenario)
     {
-        //
+        return Inertia::render('User/Scenario/Edit', [
+            'scenario' => $scenario,
+        ]);
     }
 
     /**
@@ -72,7 +74,14 @@ class ScenarioController extends Controller
      */
     public function update(UpdateScenarioRequest $request, Scenario $scenario)
     {
-        //
+        $scenario->title = $request->title;
+        $scenario->content = $request->content;
+        $scenario->save();
+
+        return to_route('user.dashboard')->with([
+            'message' => 'ネタを更新しました',
+            'status' => 'success'
+        ]);
     }
 
     /**
