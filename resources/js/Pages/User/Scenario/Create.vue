@@ -20,7 +20,7 @@ const storeScenario = () => {
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                User Create
+                User Scenario Create
             </h2>
         </template>
 

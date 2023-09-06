@@ -52,7 +52,11 @@ class ScenarioController extends Controller
      */
     public function show(Scenario $scenario)
     {
-        //
+        $id = Auth::id();
+        return Inertia::render('User/Scenario/Show', [
+            'scenario' => $scenario,
+            'user_id' => $id,
+        ]);
     }
 
     /**
